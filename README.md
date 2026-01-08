@@ -90,19 +90,19 @@ Note: These libraries can be installed automatically using the "Install Python L
    * Strategy: The system defaults to HMM for navigation.
    * Real-time Control: You can switch strategies or adjust the Segment Length (the interval between event jumps) on the fly to increase or decrease musical coherence.
 
-## Troubleshooting & Common Fixes
+### Troubleshooting & Common Fixes
 
 If you encounter issues during your first run, check the following common solutions:
 
-### Initialization & Pathing
+#### Initialization & Pathing
 * Missing py.load_latent or py.coreChoice: This indicates that Py4PD is not properly installed or its path is not set in File -> Preferences -> Path. Ensure the py4pd folder is visible to Pd.
 * No method for 'pip': This usually means you are running an older version of py4pd. Update to v1.0 via Deken or follow the terminal installation method mentioned in the technical documentation.
 
-### Python Environment
+#### Python Environment
 * Library Import Errors: If the internal Python install fails, manually run pip install numpy pandas scipy hmmlearn in your system terminal.
 * Model Loading: Ensure your latent space and HMM models are placed in the /models directory within the Aethra folder. The system will look for them there by default.
 
-### Audio & Performance
+#### Audio & Performance
 * Crackling or High Latency: Check your Audio Settings in Pure Data. A buffer size of 256 or 512 is recommended for stability.
 * No Sound in either mode with closeness above .05: Ensure the pd_distances and pd_HMMmodel variables have been successfully initialized by clicking one of the Load Configuration buttons once before starting playback.
 
