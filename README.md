@@ -1,6 +1,6 @@
 # Aethra
 
-Aethra is a co-creative musical system developed in Pure Data (Pd) that redefines the relationship between a live performer and "fixed" electroacoustic media. By leveraging the RAVE (Real-time Audio Variational AutoEncoder) model, Aethra transforms static audio files—such as a pre-recorded tape or electronic score—into a dynamic, navigable 16-dimensional latent manifold.
+Aethra is a co-creative musical system developed in Pure Data (Pd) that redefines the relationship between a live performer and "fixed" electroacoustic media. By leveraging the RAVE (Real-time Audio Variational Autoencoder) model, Aethra transforms static audio files—such as pre-recorded tapes or electronic scores—into a dynamic, navigable 16-dimensional latent manifold.
 
 This system allows performers to engage in a real-time dialogue with the electronic component, navigating through timbral and structural variations using motion-aware sampling and distance-based logic.
 
