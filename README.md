@@ -28,8 +28,44 @@ It is also designed for:
 * Sound Design: Exploring the latent intersections in a fixed soundscape to generate real-time, adaptive soundscapes.
 
 ##  Requirements
-Pure Data (compiled with py4pd support, at version 1.0.2), tested on PD version 0.56.2
-Python 3.13 (with numpy, pandas, scipy, scikit-learn, and hmmlearn, installed within the patch)
 
+* Pure Data (compiled with py4pd support, at version 1.0.2), tested on PD version 0.56.2
+
+### Library requirements - pd
+cyclone
+else
+list-abs (https://github.com/pd-externals/list-abs/tree/master)
+py4pd -> 1.0.2
+
+* Python 3.13 (with numpy, pandas, scipy, scikit-learn, and hmmlearn, installed within the patch)
+
+## Instructions
+
+### 1st Time Only
+1. Download the list-abs library and put the list-abs folder in Aethra-PD/dependencies
+2. Install remaining Pure Data Libraries (Deken)
+3. Restart Pure Data
+4. Open aethra.pd
+5. Install Python Libraries (within the patch, first option on configurations)
+6. Restart Pure Data
+
+### On Running Patch
+1. Open aethra.pd
+2. Toggle a configuration for pre-prepared ones
+3. In the window for latent dimensions weights, put every slide to 1
+4. Toggle the volume of output to start DSP
+5. Toggle microphone (Optional for instrumental input)
+6. Click on Start
+    - By default, it starts from event 0
+    - You can change by setting the value in the input box next to Start Playing
+    - If you pause, it will retain the last value; otherwise, it will start from the set value
+7. Toggle closeness values to start deviating from the original:
+    - By default, the navigation strategy is set to HMM, andthe  event is chosen from the jump event
+    - You can change these settings whenever you want while the system is running
+    - You can also change the interval between event jumps for more coherence, using the option segment length
+
+## Creating Configurations - New Audios and Latent Spaces
+
+TODO
 _____________________________________________________________________________
-Aethra is part of ongoing research into the explainability of latent spaces and the development of "mutable works" in the post-digital era.
+_Aethra is part of ongoing research into the explainability of latent spaces and the development of "mutable works" in the post-digital era._
