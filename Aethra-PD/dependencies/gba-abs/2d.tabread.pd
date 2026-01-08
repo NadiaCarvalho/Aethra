@@ -1,0 +1,16 @@
+#N canvas 528 23 305 258 10;
+#X obj 49 189 outlet;
+#X obj 49 50 inlet;
+#X obj 125 78 r x.\$1;
+#X obj 178 78 value x.\$1.v;
+#X obj 49 126 *;
+#X obj 178 50 loadbang;
+#X obj 49 164 array get \$1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 1;
+#X connect 2 0 6 1;
+#X connect 3 0 4 1;
+#X connect 3 0 6 1;
+#X connect 4 0 6 0;
+#X connect 5 0 3 0;
+#X connect 6 0 0 0;

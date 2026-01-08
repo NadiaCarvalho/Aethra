@@ -1,0 +1,12 @@
+#N canvas 733 226 443 189 12;
+#X obj 181 62 r \$1-\$2;
+#X obj 35 46 r \$1-loadParam;
+#X obj 35 103 list;
+#X obj 181 85 list prepend param \$2;
+#X obj 35 128 text insert \$1-saveProject \$3;
+#X obj 35 72 sel \$3;
+#X connect 0 0 3 0;
+#X connect 1 0 5 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 1;
+#X connect 5 0 2 0;

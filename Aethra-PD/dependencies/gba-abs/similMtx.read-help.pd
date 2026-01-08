@@ -1,0 +1,36 @@
+#N canvas 647 153 612 428 10;
+#X obj 6 4 cnv 15 600 60 empty empty similMtx.read 20 12 0 14 -233017
+-66577 0;
+#X msg 27 150 clear;
+#X msg 150 150 dimensions \$1;
+#X msg 75 150 nrCases \$1;
+#X floatatom 150 127 5 0 0 0 - - -;
+#X floatatom 75 126 5 0 0 0 - - -;
+#X text 215 258 arg:;
+#X text 215 279 number of cases;
+#X msg 246 151 add 1 1 \, add 0.5 0.5 \, add 2 2;
+#X text 215 300 dimension of each vector;
+#N canvas 837 443 494 344 META 0;
+#X text 12 45 LICENSE GPL v3;
+#X text 12 216 RELEASE_DATE 2013;
+#X text 12 196 WEBSITE https://sites.google.com/site/eargram/;
+#X text 12 176 AUTHOR Gilberto Bernardes;
+#X text 12 156 LIBRARY earGram_abs;
+#X text 12 65 DESCRIPTION computes the distance between all elements
+of a matrix;
+#X text 12 95 INLET_0 list clear nrCases dimesions;
+#X text 12 115 INLET_1 float (retrieve distances per row);
+#X text 13 135 OUTLET_0 list (distances);
+#X restore 552 400 pd META;
+#X obj 27 262 similMtx.write \$0-example 4 2;
+#X floatatom 425 242 5 0 0 1 rowNr - -;
+#X obj 425 263 similMtx.read \$0-example;
+#X text 458 43 2019sk Gilberto Bernardes;
+#X text 20 43 reads rows from a similarity matrix;
+#X connect 1 0 11 0;
+#X connect 2 0 11 0;
+#X connect 3 0 11 0;
+#X connect 4 0 2 0;
+#X connect 5 0 3 0;
+#X connect 8 0 11 0;
+#X connect 12 0 13 0;
