@@ -1,3 +1,3 @@
-audio audios/solo_redman.wav
+audio_path audios/solo_redman.wav
 latent_space models/solo_redman.pkl
-hmm models/model_gestures_100000.pkl
+hmm_model models/model_gestures_100000.pkl

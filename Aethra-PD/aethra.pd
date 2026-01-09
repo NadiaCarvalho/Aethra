@@ -1,4 +1,4 @@
-#N canvas 1682 30 1920 994 12;
+#N canvas 1680 30 1920 994 12;
 #X declare -path dependencies -path dependencies/gba-abs -path dependencies/list-abs;
 #X declare -lib cyclone;
 #X declare -lib py4pd;
@@ -7,7 +7,7 @@
 #N struct \$0-dot float color float x float y float Nr;
 #N struct \$0-line float color float a float b float c float d;
 #N struct \$0-pointer float c float x float y float lx float ly float cx float cy float rx float ry float ex float ey;
-#N canvas 1680 30 1920 994 (subpatch) 1;
+#N canvas 2077 138 500 372 (subpatch) 0;
 #X obj 12 17 namecanvas \$0-echos;
 #X text 165 183 Installs in Python;
 #X obj 705 424 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
@@ -38,7 +38,7 @@
 #X text 9 184 Table Declaration;
 #X text 702 404 Starters:;
 #X obj 11 86 declare -lib py.aethra;
-#X msg 1580 579 loadsource solo_redman;
+#X msg 1580 579 loadsource models/solo_redman.pkl;
 #X obj 1580 604 s \$0-load-model-knob;
 #X obj 1271 582 r s2;
 #X msg 1271 606 reload;
@@ -46,21 +46,21 @@
 #X obj 1328 628 s database;
 #X text 1321 91 Configurations and Loading of Latent Spaces and HMM;
 #X obj 1328 258 text define -k aethra-conf;
-#A set audio audios/EOU_electronics_extra.wav \; latent_space models/model_EOU_extra.pkl \; hmm models/model_gestures_100000.pkl \;;
+#A set audio_path audios/solo_redman.wav \; latent_space models/solo_redman.pkl \; hmm_model models/model_gestures_100000.pkl \;;
 #X obj 301 17 declare -lib else;
 #X msg 1639 267 auto;
 #X obj 1639 292 text sequence aethra-conf -g;
 #X msg 1679 267 line 0;
 #X obj 1329 450 r latent_space;
 #X obj 1329 474 symbol;
-#X msg 1328 579 load models/model_EOU_extra.pkl;
+#X msg 1328 579 load models/solo_redman.pkl;
 #X msg 1328 203 read -c configurations/echoes.txt;
 #X msg 1349 549 set load \$1;
 #X obj 1329 699 symbol;
 #X obj 1329 727 t b s;
 #X msg 1361 751 set load \$1;
 #X obj 1329 675 r hmm_model;
-#X msg 1328 804 loadhmm models/model_EOU_extra.pkl;
+#X msg 1328 804 load models/model_gestures_100000.pkl;
 #X obj 1328 831 s \$0-load-hmm;
 #X obj 1329 499 t b s b s;
 #X msg 1580 549 set loadsource \$1;
@@ -197,10 +197,10 @@
 #X obj 483 366 hsl 795 25 0 2.43088e+07 0 0 \$0-scrub-bar \$0-current--event-play-bar empty -2 -8 0 12 #fc8000 #000000 #000000 0 0;
 #X obj 1029 218 bng 15 250 50 0 empty empty empty 17 7 0 10 #fc8000 #000000 #000000;
 #N canvas 0 28 1680 1050 (subpatch) 0;
-#X array \$0-sample 3.62928e+07 float 2;
+#X array \$0-sample 6.72e+06 float 2;
 #A color 0;
 #A width 2;
-#X coords 0 1 3.62928e+07 -1 800 100 1 0 0;
+#X coords 0 1 6.72e+06 -1 800 100 1 0 0;
 #X restore 480 266 graph;
 #X obj 480 266 cnv 15 800 100 empty empty empty 20 12 0 14 #fce0c4 #404040 0;
 #N canvas 0 23 450 300 \$0-seg-viz 0;
@@ -278,7 +278,7 @@
 #X obj 184 91 r \$0-start--event-play;
 #X obj 183 492 s \$0-next-count;
 #X floatatom 183 429 5 0 0 0 - - - 0;
-#X msg 183 382 3412;
+#X msg 183 382 278;
 #X obj 189 357 cyclone/prepend set;
 #X obj 189 332 r cur-num;
 #X obj 309 115 r \$0-stop--event-play;
@@ -299,7 +299,7 @@
 #X obj 761 623 s~ d1;
 #X obj 802 623 s~ d2;
 #X obj 881 808 cyclone/prepend set;
-#X msg 881 832 3412;
+#X msg 881 832 278;
 #X obj 881 856 s cur-num;
 #X obj 183 406 t f f;
 #X obj 226 428 s play-cur;
@@ -326,7 +326,7 @@
 #X floatatom 322 673 5 0 0 0 - - - 0;
 #X obj 1096 313 s \$0-current--event-play-bar;
 #X obj 1096 265 cyclone/prepend set;
-#X msg 1096 289 2.79429e+07;
+#X msg 1096 289 2.26918e+06;
 #X obj 184 115 t b b b;
 #X obj 1248 490 r \$0-mode;
 #X obj 1367 603 cyclone/switch 2 1;
@@ -359,7 +359,7 @@
 #X obj 164 251 int;
 #X obj 164 277 cyclone/prepend set reset;
 #X obj 164 179 gate, f 18;
-#X msg 287 127 3.77651e+06;
+#X msg 287 127 2.26918e+06;
 #X obj 287 103 cyclone/prepend set;
 #X obj 164 153 tgl 19 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 164 127 delay;
@@ -428,8 +428,8 @@
 #X obj 1390 758 pack f f;
 #X msg 1390 780 set run \$1 \$2;
 #X obj 1367 650 t b f b;
-#X msg 1367 802 run 3411 0;
-#X msg 1717 824 setseqlen 5;
+#X msg 1367 802 run 277 0;
+#X msg 1717 824 setseqlen 20;
 #X obj 1717 774 t b f;
 #X obj 1717 750 r seq-len;
 #X msg 1749 799 set setseqlen \$1;
@@ -835,7 +835,7 @@
 #N canvas 1680 30 1920 994 osc-connection-touchdesigner 0;
 #X obj 32 31 r \$0-current--event-play;
 #X obj 32 55 t b f;
-#X msg 33 102 3411;
+#X msg 33 102 277;
 #X msg 45 204 connect 127.0.0.1 5000;
 #X obj 33 252 netsend -u -b;
 #X obj 33 124 oscformat point, f 16;
