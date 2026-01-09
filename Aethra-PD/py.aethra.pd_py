@@ -85,9 +85,9 @@ class LatentLoader(pd.NewObject):
         except Exception as e:
             self.error(f"Failed to load latent space: {e}")
 
-class CoreChoice(pd.NewObject):
-    #py.coreChoice: Decision mechanism for navigation.
-    name = "py.coreChoice"
+class NavigationMechanism(pd.NewObject):
+    #py.core_choice: Decision mechanism for navigation.
+    name = "py.navigation_mechanism"
 
     def __init__(self, args):
         self.inlets = 1
@@ -147,7 +147,7 @@ class CoreChoice(pd.NewObject):
 
         # HMM Prediction Mode
         if self.mode == 0:
-            motion = 'P' if closeness <= 0.4 else 'O' if closeness <= 0.75 else 'C'
+            motion = 'P' if closeness <= 0.35 else 'O' if closeness <= 0.75 else 'C'
             try:
                 # Prediction logic using HMM
                 model_hmm = self.hmm_model.get(motion)

@@ -1,0 +1,3 @@
+audio: ~/audios/EOU_electronics_extra.wav
+latent_space: ~/models/model_EOU_extra.pkl
+hmm: ~/models/model_gestures_100000.pkl
