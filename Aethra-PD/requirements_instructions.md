@@ -33,3 +33,15 @@ list-abs
     - you can also change the interval between event jumps for more coherence, using the option segment length
 
 # Creating Configurations - New Audios and Latent Spaces
+
+To create a configuration, create a .txt file with the content:
+
+audio_path PATH_TO_AUDIO_FILE;
+latent_space PATH_TO_LATENT_SPACE_PKL_FILE;
+hmm_model PATH_TO_HMM_MODEL_PKL_FILE;
+
+Example file for Echoes of the Unseen:
+
+audio_path audios/EOU_electronics_extra.wav;
+latent_space models/model_EOU_extra.pkl;
+hmm_model models/model_gestures_100000.pkl;
