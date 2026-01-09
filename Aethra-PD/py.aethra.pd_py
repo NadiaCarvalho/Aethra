@@ -7,6 +7,8 @@ import random
 import numpy as np
 import pandas
 
+np.random.seed(42)
+
 from hmmlearn import hmm
 from scipy.spatial import distance
 
@@ -147,7 +149,7 @@ class NavigationMechanism(pd.NewObject):
 
         # HMM Prediction Mode
         if self.mode == 0:
-            motion = 'P' if closeness <= 0.35 else 'O' if closeness <= 0.75 else 'C'
+            motion = 'P' if closeness <= 1/3 else 'O' if closeness <= 2/3 else 'C'
             try:
                 # Prediction logic using HMM
                 model_hmm = self.hmm_model.get(motion)
@@ -155,7 +157,7 @@ class NavigationMechanism(pd.NewObject):
                 _, states = model_hmm.decode(obs)
 
                 next_state = np.random.choice(model_hmm.n_components, p=model_hmm.transmat_[states[-1]])
-                pred = model_hmm.means_[next_state]
+                pred = model_hmm.means_[next_state] + np.random.multivariate_normal(np.zeros(16), model_hmm.covars_[next_state])
 
                 # Find nearest neighbor in original latent space
                 idx = np.argmin(distance.cdist([pred], self.source, 'euclidean'))
