@@ -64,7 +64,7 @@ class LatentLoader(pd.NewObject):
         model_name = args[0]
 
         self.logpost(2, f"Loading Model: {model_name}")
-        path = f"{self.get_current_dir()}/models/{model_name}.pkl"
+        path = f"{self.get_current_dir()}/{model_name}"
 
         try:
             source = pandas.read_pickle(path)
@@ -110,7 +110,7 @@ class NavigationMechanism(pd.NewObject):
     def in_1_loadsource(self, args):
         model_name = args[0]
         self.logpost(2, f"Loading Model: {model_name}")
-        path = f"{self.get_current_dir()}/models/{model_name}.pkl"
+        path = f"{self.get_current_dir()}/{model_name}"
 
         try:
             df = pandas.read_pickle(path)
@@ -130,7 +130,7 @@ class NavigationMechanism(pd.NewObject):
     def in_1_loadhmm(self, args):
         model_name = args[0]
         self.logpost(2, f"Loading HMM Model {model_name}")
-        path = f"{self.get_current_dir()}/models/{model_name}.pkl"
+        path = f"{self.get_current_dir()}/{model_name}"
 
         try:
             with open(path, 'rb') as f:
