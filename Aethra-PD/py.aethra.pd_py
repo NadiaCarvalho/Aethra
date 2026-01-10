@@ -185,7 +185,8 @@ class NavigationMechanism(pd.NewObject):
 
                 # 2. Sort and Segment the Manifold into 25 Bins
                 ids = np.argsort(weighted_distances)
-                bin_size = len(ids) // 25
+                num_bins = 25
+                bin_size = len(ids) // num_bins
 
                 # 3. Map the One-Knob Control 'C' (closeness) to a Bin Index
                 # We use a clipping function to ensure the index stays within [0, 24]
