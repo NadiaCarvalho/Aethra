@@ -147,40 +147,59 @@ class NavigationMechanism(pd.NewObject):
             self.out(0, pd.FLOAT, actual+1)
             return
 
-        # HMM Prediction Mode
+        # Motion-Based Navigation Strategy
         if self.mode == 0:
             motion = 'P' if closeness <= 1/3 else 'O' if closeness <= 2/3 else 'C'
             try:
-                # Prediction logic using HMM
+                # 1. Select model based on motion type (OR, P, O, or C)
                 model_hmm = self.hmm_model.get(motion)
+
+                # 2. Decode the current hidden state sequence from the initial latent vectors
                 obs = self.source.iloc[actual:actual+1].values
                 _, states = model_hmm.decode(obs)
 
+                # 3. Sample next hidden state based on transition matrix (transmat_)
                 next_state = np.random.choice(model_hmm.n_components, p=model_hmm.transmat_[states[-1]])
+
+                # 4. Sample the next latent observation from a multivariate normal distribution
+                # Technical note: full covariance matrix captures inter-dimensional dependencies
                 pred = model_hmm.means_[next_state] + np.random.multivariate_normal(np.zeros(16), model_hmm.covars_[next_state])
 
-                # Find nearest neighbor in original latent space
+                # 5. Find nearest neighbor in original latent space
                 idx = np.argmin(distance.cdist([pred], self.source, 'euclidean'))
                 self.out(0, pd.FLOAT, idx)
             except Exception as e:
                 self.logpost(2, f"Error on HMM: {e}")
                 self.out(0, pd.FLOAT, actual + 1)
 
-        # k-NN Distance Strategy Mode
+        # Distance-Based Navigation Strategy
         else:
             try:
-                weighted_distances = np.zeros(len(self.source))
-                for i, w in enumerate(self.latent_dimension_weights):
-                    weighted_distances += self.distance_matrix[i][int(actual + 1)] * w
+                # 1. Calculate Weighted Euclidean Distance
+                # self.distance_matrix contains the pre-computed differences per dimension
+                # We apply the user-defined weights to prioritize specific timbral features
+                weighted_distances = np.sqrt(np.sum([
+                    self.distance_matrix[dim][int(actual + 1)] * w
+                    for dim, w in enumerate(self.latent_dimension_weights)
+                ], axis=0))
 
+                # 2. Sort and Segment the Manifold into 25 Bins
                 ids = np.argsort(weighted_distances)
                 bin_size = len(ids) // 25
-                bin_idx = int(closeness * 20)  # Simplified bin mapping
 
-                # Weighted random choice within the selected bin
+                # 3. Map the One-Knob Control 'C' (closeness) to a Bin Index
+                # We use a clipping function to ensure the index stays within [0, 24]
+                bin_idx = int(np.clip(closeness * (num_bins - 1), 0, num_bins - 1))
+
+                # 4. Weighted Random Choice within the Focus Window
+                # We extract the IDs for the selected bin and calculate probabilities
+                # inversely proportional to distance (closer units are more likely)
                 selected_ids = ids[bin_idx * bin_size : (bin_idx + 1) * bin_size]
-                max_d = np.max(weighted_distances)
-                p_weights = [max_d - weighted_distances[i] for i in selected_ids]
+                bin_distances = weighted_distances[selected_ids]
+
+                # Inverse weighting: subtract distance from max to prioritize nearest neighbors
+                max_bin_d = np.max(bin_distances)
+                p_weights = (max_bin_d - bin_distances) + 1e-6 # small epsilon to avoid zero weights
 
                 choice = random.choices(selected_ids, weights=p_weights, k=1)[0]
                 self.out(0, pd.FLOAT, choice)
