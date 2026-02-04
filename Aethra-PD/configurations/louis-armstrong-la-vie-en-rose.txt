@@ -1,0 +1,3 @@
+audio_path audios/Louis-Armstrong-La-Vie-en-Rose.wav
+latent_space models/Louis-Armstrong-La-Vie-en-Rose.pkl
+hmm_model models/model_gestures_100000.pkl

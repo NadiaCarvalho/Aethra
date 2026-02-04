@@ -1,0 +1,3 @@
+audio_path audios/Joe-Pass-Misty.wav
+latent_space models/Joe-Pass-Misty.pkl
+hmm_model models/model_gestures_100000.pkl

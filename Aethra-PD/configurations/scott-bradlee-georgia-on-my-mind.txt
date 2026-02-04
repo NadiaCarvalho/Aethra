@@ -1,0 +1,3 @@
+audio_path audios/Scott-Bradlee-Georgia-On-My-Mind.wav
+latent_space models/Scott-Bradlee-Georgia-On-My-Mind.pkl
+hmm_model models/model_gestures_100000.pkl

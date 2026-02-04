@@ -1,8 +1,8 @@
 .DS_Store
 
 # Audios
-Aethra-PD/audios/EOU_electronics_extra.wav
-Aethra-PD/audios/solo_redman.wav
+Aethra-PD/audios/*.wav
+Aethra-PD/audios/*.mp4
 
 # List Abs Dependecies
 Aethra-PD/dependencies/list-abs
